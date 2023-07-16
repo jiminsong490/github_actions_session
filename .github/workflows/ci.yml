@@ -12,10 +12,6 @@ on: # Event
 jobs: # Job
   ci: # Job 이름
     runs-on: ubuntu-latest # Runner
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [ 3.8.3 ]
     services:
       mysql:
         image: mysql:8.0
@@ -33,11 +29,6 @@ jobs: # Job
       run: |
         mysql --version
         mysql --host 127.0.0.1 --port 3306 -u ${{ secrets.MYSQL_USERNAME }} -p${{ secrets.MYSQL_ROOT_PASSWORD }}
-
-    - name: Set up Python 3.8.3
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8.3
 
     - name: Install Dependencies
       run: |
