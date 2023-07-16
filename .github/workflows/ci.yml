@@ -44,12 +44,12 @@ jobs: # Job
     - name: Run migrations
       run: |
         cd github_actions
-        python manage.py migrate
+        python manage.py migrate --settings=config.settings.actions
 
     - name: Run Tests
       run: |
         cd github_actions
         mysql --host 127.0.0.1 --port 3306 -u ${{ secrets.MYSQL_USERNAME }} -p${{ secrets.MYSQL_ROOT_PASSWORD }}"
-        python manage.py test
+        python manage.py test --settings=config.settings.actions
       env:
         SYSTEM_ENV: GITHUB_WORKFLOW
