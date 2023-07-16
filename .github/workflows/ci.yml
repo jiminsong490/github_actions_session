@@ -32,7 +32,7 @@ jobs: # Job
     - name: Verify MySQL connection
       run: |
         mysql --version
-        mysql --host 127.0.0.1 --port 3306 -u ${{ secrets.MYSQL_USERNAME }} -p${{ secrets.MYSQL_ROOT_PASSWORD }}"
+        mysql --host 127.0.0.1 --port 3306 -u ${{ secrets.MYSQL_USERNAME }} -p${{ secrets.MYSQL_ROOT_PASSWORD }}
 
     - name: Set up Python 3.8.3
       uses: actions/setup-python@v2
@@ -52,7 +52,7 @@ jobs: # Job
     - name: Run Tests
       run: |
         cd github_actions
-        mysql --host 127.0.0.1 --port 3306 -u ${{ secrets.MYSQL_USERNAME }} -p${{ secrets.MYSQL_ROOT_PASSWORD }}"
+        mysql --host 127.0.0.1 --port 3306 -u ${{ secrets.MYSQL_USERNAME }} -p${{ secrets.MYSQL_ROOT_PASSWORD }}
         python manage.py test
       env:
         SYSTEM_ENV: GITHUB_WORKFLOW
