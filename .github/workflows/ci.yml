@@ -44,7 +44,6 @@ jobs: # Job
     - name: Run migrations
       run: |
         cd github_actions
-        python manage.py makemigrations --settings=config.settings.actions
         python manage.py migrate --settings=config.settings.actions
 
     - name: Run Tests
