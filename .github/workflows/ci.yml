@@ -13,7 +13,7 @@ jobs: # Job
   ci: # Job 이름
     runs-on: ubuntu-latest # Runner
     services:
-      mysql:
+      db:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
