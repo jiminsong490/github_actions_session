@@ -51,8 +51,8 @@ jobs:
           key: ${{ secrets.AWS_KEY_PEM }}
           envs: GITHUB_SHA
           script: |
-              github pull
               cd github_actions_session
+              git pull
               sudo docker-compose -f docker-compose.prod.yml down
               sudo docker-compose -f docker-compose.prod.yml pull
               sudo docker-compose -f docker-compose.prod.yml up
