@@ -1,3 +1,3 @@
 from .base import *
 
-ALLOWED_HOSTS = []
+# 로컬 설정 추가

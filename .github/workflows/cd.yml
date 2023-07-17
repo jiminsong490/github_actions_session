@@ -53,6 +53,10 @@ jobs:
           script: |
               github pull
               cd github_actions_session
+              sudo docker-compose -f docker-compose.prod.yml down
+              sudo docker-compose -f docker-compose.prod.yml pull
+              sudo docker-compose -f docker-compose.prod.yml up
+            
           #   docker pull [계정명]/spring-cicd:${GITHUB_SHA::7}
           #   docker tag [계정명]/spring-cicd:${GITHUB_SHA::7} spring-cicd
           #   docker stop server
