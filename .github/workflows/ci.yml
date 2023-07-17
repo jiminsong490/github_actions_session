@@ -25,7 +25,8 @@ jobs: # Job
 
     steps: # Step
     # 레포지토리의 소스 코드를 체크아웃하여 작업 디렉토리로 가져오는 action
-    - uses: actions/checkout@v2 
+    - name: Checkout
+      uses: actions/checkout@v2 
     # mysql 컨테이너 연결 확인
     - name: Verify MySQL connection
       run: |
