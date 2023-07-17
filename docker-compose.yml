@@ -11,9 +11,6 @@ services:
         DJANGO_CORS_ORIGIN_WHITELIST: "*"
     ports:
       - "8000:8000"
-    depends_on:
-      db:
-        condition: service_healthy
     command: >
       sh -c "python manage.py makemigrations &&
               python manage.py migrate &&
