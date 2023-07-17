@@ -14,12 +14,13 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    command: >
-      sh -c "python manage.py makemigrations &&
-              python manage.py migrate &&
-              python manage.py runserver 0.0.0.0:8000 --settings=config.settings.prod"
-    # networks:
-    #   - default_bridge
+    command:
+      - sh 
+      - -c 
+      - |
+        python manage.py makemigrations
+        python manage.py migrate
+        python manage.py runserver 0.0.0.0:8000 --settings=config.settings.prod
 
   db:
     container_name: db-mysql
@@ -38,14 +39,3 @@ services:
             test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
             timeout: 20s
             retries: 10
-
-    # networks:
-    #   default_bridge:
-    #     ipv4_address: 172.16.3.4
-
-# networks:
-#   default_bridge:
-#     ipam:
-#       driver: default
-#       config:
-#         - subnet: 172.16.3.0/24
