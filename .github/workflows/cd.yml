@@ -1,0 +1,49 @@
+name: Django CD  # Workflow name
+on:
+  pull_request:
+    types:
+      - closed
+    branches: [ main ]
+
+jobs:
+  Deploy:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.11.0 
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11.0 
+
+      - name: Setting .env
+        run: |
+          echo "${{ secrets.ENV }}" >> .env
+          cat .env
+
+#      - name: Connect EC2
+#        run: |
+#          echo "$SSH_PEM_KEY" >> $HOME/key.pem
+#          chmod 400 $HOME/key.pem
+#          ssh -o StrictHostKeyChecking=no -i $HOME/key.pem ${SSH_USER}@${SSH_HOST} "echo 'Connected to EC2'"
+#        env:
+#          SSH_USER: ${{secrets.AWS_USER}}
+#          SSH_KNOWN_HOSTS: ${{secrets.AWS_HOST}}
+#          SSH_PEM_KEY: ${{secrets.AWS_SSH_KEY_PEM}}
+
+      - uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.AWS_HOST}}
+          username: ec2-user
+          key: ${{ secrets.AWS_KEY_PEM }}
+          envs: GITHUB_SHA
+          script: |
+            mkdir test
+          # script: |
+          #   docker pull [계정명]/spring-cicd:${GITHUB_SHA::7}
+          #   docker tag [계정명]/spring-cicd:${GITHUB_SHA::7} spring-cicd
+          #   docker stop server
+          #   docker run -d --rm --name server -p 80:8080 spring-cicd
+
