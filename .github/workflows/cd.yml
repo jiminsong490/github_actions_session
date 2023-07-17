@@ -1,5 +1,5 @@
-name: Django CD  # Workflow name
-on:
+name: Django CD  # workflow 이름
+on: # Event
   pull_request:
     types:
       - closed
@@ -53,12 +53,10 @@ jobs:
           script: |
               cd github_actions_session
               git pull
+              cd github_actions
+              python manage.py makemigrations
+              python manage.py migrate
+              cd ../
               sudo docker-compose -f docker-compose.prod.yml down
               sudo docker-compose -f docker-compose.prod.yml pull
-              sudo docker-compose -f docker-compose.prod.yml up
-            
-          #   docker pull [계정명]/spring-cicd:${GITHUB_SHA::7}
-          #   docker tag [계정명]/spring-cicd:${GITHUB_SHA::7} spring-cicd
-          #   docker stop server
-          #   docker run -d --rm --name server -p 80:8080 spring-cicd
-
+              sudo docker-compose -f docker-compose.prod.yml up -d
