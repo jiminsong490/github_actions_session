@@ -15,12 +15,6 @@ jobs: # Job
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Checkout
-        run: |
-          REPO_URL="https://github.com/${{ github.repository }}"
-          REF="${{ github.ref }}"
-          git clone --depth=1 --branch "$REF" "$REPO_URL" "$GITHUB_WORKSPACE"
-
       - name: Set up Python 3.11.0 
         uses: actions/setup-python@v2
         with:
