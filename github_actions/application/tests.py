@@ -10,6 +10,7 @@ class PhoneVerificationTestCase(APITestCase):
         self.data = {
             "id": 1,
             "title": "테스트",
+            "age": 23,
             "content": "입니다",
             "created_at": "2023-07-16T17:15:03.288341Z",
             "updated_at": "2023-07-16T17:15:03.288501Z"
