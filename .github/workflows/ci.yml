@@ -60,11 +60,6 @@ jobs: # Job
         python manage.py makemigrations --settings=config.settings.actions
         python manage.py migrate --settings=config.settings.actions
 
-    - name: Run Django
-      run: |
-        cd github_actions
-        python manage.py runserver 0.0.0.0:8000 --settings=config.settings.actions
-
     # 테스트 진행
     - name: Run Tests
       run: |
