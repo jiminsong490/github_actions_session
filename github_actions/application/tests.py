@@ -18,8 +18,3 @@ class PhoneVerificationTestCase(APITestCase):
     def test_post_phone_number_success(self):
         response = self.client.post(self.url_1, data=self.data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
-    # def test_post_phone_number_string_error(self):
-    #     data = {"phone": "010123456abc"}
-    #     response = self.client.post(self.url_2, data=data, format='json')
-    #     self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
