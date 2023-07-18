@@ -40,6 +40,12 @@ jobs: # Job
       with:
         python-version: 3.11.0 
 
+    # .env 생성
+    - name: Setting .env
+      run: |
+          echo "${{ secrets.ENV }}" >> .env
+          cat .env
+
     # 의존성 설치
     - name: Install Dependencies
       run: |
@@ -51,7 +57,13 @@ jobs: # Job
     - name: Run migrations
       run: |
         cd github_actions
+        python manage.py makemigrations --settings=config.settings.actions
         python manage.py migrate --settings=config.settings.actions
+
+    - name: Run Django
+      run: |
+        cd github_actions
+        python manage.py runserver 0.0.0.0:8000 --settings=config.settings.actions
 
     # 테스트 진행
     - name: Run Tests
